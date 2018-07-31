@@ -10,7 +10,9 @@
     </a>
   </p>
 </div>
+<div class='tile is-ancestor'>
     <channel v-for='channel in channels' :channel='channel' :key='channel.name'></channel>
+</div>
   </div> 
 </template>
 
@@ -19,10 +21,10 @@ import Channel from "./Channel";
 
 export default {
   name: "channels",
-  data(){
+  data() {
     return {
-      channelName: '',
-    }
+      channelName: ""
+    };
   },
   components: {
     Channel
@@ -33,9 +35,9 @@ export default {
     }
   },
   methods: {
-    addChannel(){
-      this.$store.dispatch('Channels/addChannel', this.channelName);
-      this.channelName = '';
+    addChannel() {
+      this.$store.dispatch("Channels/addChannel", this.channelName);
+      this.channelName = "";
     }
   }
 };

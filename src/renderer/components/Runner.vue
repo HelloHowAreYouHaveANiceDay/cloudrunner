@@ -1,14 +1,8 @@
 <template>
-  <div id="wrapper">
-    <main>
-      <div class="left-side">
-        <span class="title">
-          this is a vue project
-        </span>
-        <!-- <system-information></system-information> -->
+  <div id="wrapper" class="section container">
+    <div class="content">
         <channels></channels>
-      </div>
-    </main>
+    </div>
   </div>
 </template>
 

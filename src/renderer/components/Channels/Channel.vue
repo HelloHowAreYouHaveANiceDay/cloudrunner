@@ -1,14 +1,19 @@
 <template>
-  <div class="channel">
-    name: {{channel.name}}
+  <div class="channel tile is-vertical is-parent card">
+    <div>
+      name: {{channel.name}}
+    </div>
+    <div class="button">
+      channel stuff
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Channel', 
+  name: 'Channel',
   props: ['channel'],
-}
+};
 </script>
 
 <style scoped>
