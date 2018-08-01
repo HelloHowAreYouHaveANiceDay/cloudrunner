@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import UUID from 'uuid/v4';
+import { ipcRenderer } from 'electron';
 
 const R = require('ramda');
 const jobConfig = require('./Jobs/jobs.json');
@@ -28,6 +29,9 @@ const mutations = {
     }
     return true;
   },
+  markComplete(state, id) {
+    state[id].complete = true;
+  },
   setPresets(state, presets) {
     state.presets = presets;
   },
@@ -38,6 +42,7 @@ const actions = {
     new Promise((resolve, reject) => {
       const newJob = {
         id: UUID(),
+        complete: false,
         ...job,
       };
       context.commit('add', newJob);
@@ -54,7 +59,16 @@ const actions = {
     }),
   run: (context, id) =>
     new Promise((resolve, reject) => {
+      const payload = {
+        job: context.state.byId[id]
+      };
+      ipcRenderer.send('job', payload);
 
+      ipcRenderer.on(id, (event, arg) => {
+        console.log(arg);
+      });
+
+      resolve();
     }),
   loadPresets: context => new Promise((resolve, reject) => {
     context.commit('setPresets', jobConfig.presets);

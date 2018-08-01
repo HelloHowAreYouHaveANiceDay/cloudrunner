@@ -1,5 +1,5 @@
-import { app, BrowserWindow } from 'electron' // eslint-disable-line
-
+import { app, BrowserWindow, ipcMain } from 'electron' // eslint-disable-line
+import Run from './run';
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -29,6 +29,8 @@ function createWindow() {
     mainWindow = null;
   });
 }
+
+Run();
 
 app.on('ready', createWindow);
 
@@ -63,3 +65,4 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
  */
+
