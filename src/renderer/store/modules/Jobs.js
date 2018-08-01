@@ -2,8 +2,10 @@ import Vue from 'vue';
 import UUID from 'uuid/v4';
 
 const R = require('ramda');
+const jobConfig = require('./Jobs/jobs.json');
 
 const state = {
+  presets: [],
   byId: {},
   allIds: [],
 };
@@ -25,6 +27,9 @@ const mutations = {
       state.allIds = state.channels.splice(index - 1, 1);
     }
     return true;
+  },
+  setPresets(state, presets) {
+    state.presets = presets;
   },
 };
 
@@ -51,6 +56,10 @@ const actions = {
     new Promise((resolve, reject) => {
 
     }),
+  loadPresets: context => new Promise((resolve, reject) => {
+    context.commit('setPresets', jobConfig.presets);
+    resolve();
+  }),
 };
 
 export default {
