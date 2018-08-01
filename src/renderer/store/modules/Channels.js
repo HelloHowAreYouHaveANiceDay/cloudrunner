@@ -1,19 +1,6 @@
 // coordinates ipc pings between main and render processes
-const R = require('ramda');
+import Channel from './Channels/Channel';
 
-class Channel {
-  constructor(name) {
-    this.name = name;
-  }
-
-  static isOn(context, channel) {
-    return R.not(R.isEmpty(R.find(R.propEq('name', channel))(context.state.channels)));
-  }
-
-  static add(context, channel) {
-    context.commit('addChannel', channel);
-  }
-}
 
 const state = {
   channels: [],
@@ -24,32 +11,51 @@ const mutations = {
     const newChannel = new Channel(channelName);
     state.channels.push(newChannel);
   },
-  removeChannel(state) {
-    state.main += 1;
+  removeChannel(state, channelName) {
+    const index = Channel.findIndex(state.channels)(channelName);
+    if (index === 0 && state.channels.length === 1) {
+      state.channels = [];
+    } else {
+      state.channels = state.channels.splice(index - 1, 1);
+    }
   },
 };
 
 const actions = {
-  isOn(context, channel) {
-    return R.not(R.isEmpty(R.find(R.propEq('name', channel))(context.state.channels)));
-  },
-  isOff(context, channel) {
-    return R.isEmpty(R.find(R.propEq('name', channel))(context.state.channels));
-  },
   addChannel(context, channel) {
-    if (Channel.isOn(context, channel)) {
-      Channel.add(context, channel);
-    }
+    return new Promise((resolve, reject) => {
+      if (!channel) {
+        reject(new Error('channel has no name'));
+      } else if (Channel.findIndex(context.state.channels)(channel) === -1) {
+        Channel.add(context, channel);
+        resolve(`${channel} successfully added`);
+      } else {
+        reject(new Error('channel already exists'));
+      }
+    });
   },
-  removeChannel(context, channel) {
+  remove(context, channel) {
+    return new Promise((resolve, reject) => {
+      if (Channel.findIndex(context.state.channels)(channel) > -1) {
+        Channel.remove(context, channel);
+        resolve(`${channel} removed successfully`);
+      } else {
+        reject(new Error('cannot remove a non-existant channel'));
+      }
+    });
+  },
+  // remove task from que
+};
 
-  },
+const getters = {
+  // get task status
 };
 
 
 export default {
   namespaced: true,
   state,
+  getters,
   mutations,
   actions,
 };

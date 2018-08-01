@@ -36,8 +36,12 @@ export default {
   },
   methods: {
     addChannel() {
-      this.$store.dispatch("Channels/addChannel", this.channelName);
-      this.channelName = "";
+      this.$store
+        .dispatch("Channels/addChannel", this.channelName)
+        .then(response => {
+          console.log(response);
+          this.channelName = "";
+        });
     }
   }
 };
