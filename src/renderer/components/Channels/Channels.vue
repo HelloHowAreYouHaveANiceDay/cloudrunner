@@ -32,7 +32,7 @@ export default {
   computed: {
     channels() {
       return this.$store.state.Channels.channels;
-    }
+    },
   },
   methods: {
     addChannel() {

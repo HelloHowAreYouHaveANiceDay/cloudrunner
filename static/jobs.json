@@ -1,0 +1,28 @@
+{
+  "processSchema":{
+    "name": "String",
+    "command": "Array",
+    "args": "Array",
+    "options": {
+      "cwd": "String",
+      "env": "Object",
+      "argv0": "String",
+      "stdio": "Array | String",
+      "detached": "Bool",
+      "uid": "Num",
+      "gid": "Num",
+      "shell": "Bool | String",
+      "windowsVerbatiumArguments": "Bool",
+      "windowsHide": "Bool"
+    }
+  },
+  "presets": [
+    {
+      "name":"what's in C",
+      "command":"dir",
+      "options": {
+        "cwd": "C:/"
+      }
+    }
+  ]
+}
