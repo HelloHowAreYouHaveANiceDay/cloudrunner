@@ -1,7 +1,7 @@
 {
   "processSchema":{
     "name": "String",
-    "command": "Array",
+    "command": "String",
     "args": "Array",
     "options": {
       "cwd": "String",
@@ -18,11 +18,15 @@
   },
   "presets": [
     {
-      "name":"what's in C",
+      "name":"help test",
       "command":"help",
       "options": {
         "cwd": "C:/"
       }
+    },
+    {
+      "name":"has pdal",
+      "command":"command -v pdal"
     }
   ]
 }

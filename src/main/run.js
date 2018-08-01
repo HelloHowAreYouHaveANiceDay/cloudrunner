@@ -18,6 +18,10 @@ export default function () {
       event.sender.send(arg.job.id, data.toString());
     });
 
+    job.on('error', (error) => {
+      event.sender.send(arg.job.id, error);
+    });
+
     job.on('close', (code) => {
       event.sender.send(arg.job.id, 'CLOSE');
     });
