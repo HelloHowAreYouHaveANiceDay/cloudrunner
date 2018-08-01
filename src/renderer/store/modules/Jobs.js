@@ -60,13 +60,9 @@ const actions = {
   run: (context, id) =>
     new Promise((resolve, reject) => {
       const payload = {
-        job: context.state.byId[id]
+        job: context.state.byId[id],
       };
       ipcRenderer.send('job', payload);
-
-      ipcRenderer.on(id, (event, arg) => {
-        console.log(arg);
-      });
 
       resolve();
     }),

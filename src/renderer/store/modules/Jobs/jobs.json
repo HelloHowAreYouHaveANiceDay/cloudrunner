@@ -19,7 +19,7 @@
   "presets": [
     {
       "name":"what's in C",
-      "command":"dir",
+      "command":"help",
       "options": {
         "cwd": "C:/"
       }

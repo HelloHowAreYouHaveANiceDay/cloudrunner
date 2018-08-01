@@ -20,6 +20,7 @@
 
 <script>
 import { ipcRenderer } from "electron";
+
 export default {
   name: "Job",
   props: ["jobId"],
@@ -35,13 +36,12 @@ export default {
     run() {
       this.$store.dispatch("Jobs/run", this.jobId);
 
-      setInterval(() => {
-        this.$electron.ipcRenderer.send("ping");
-      }, 1000);
-
-      this.$electron.ipcRenderer.on("pong", (event, data) => {
-        this.myDataVar = data;
-        console.log(data);
+      ipcRenderer.on(this.jobId, (event, arg) => {
+        if (arg === 'CLOSE') {
+          ipcRenderer.removeAllListeners(this.jobId);
+        } else {
+          console.log(arg);
+        }
       });
     }
   }

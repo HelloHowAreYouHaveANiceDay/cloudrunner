@@ -11,7 +11,7 @@ if (!process.env.IS_WEB) {
   console.log('not web');
   Vue.use(require('vue-electron'));
   ipcRenderer.on('main-log', (event, arg) => {
-    console.log(event, arg);
+    console.log(arg);
   });
 }
 Vue.http = Vue.prototype.$http = axios;
