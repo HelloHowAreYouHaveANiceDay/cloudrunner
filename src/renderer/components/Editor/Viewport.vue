@@ -42,6 +42,10 @@ export default {
         rows: 4,
         cols: 0
       },
+      gridLines:{
+        rows:[],
+        cols:[]
+      }
       edges: [],
       scale: {
         x: null,
@@ -57,13 +61,10 @@ export default {
         const x = 1 / (this.grid.rows + 1) * i;
         rows.push(this.scale.x(x));
       }
-      // cols
-      return {
-        rows
-      };
     }
   },
   methods: {
+    calcRow
     onResize() {
       this.width = this.$el.offsetWidth;
       this.height = this.$el.offsetHeight;
