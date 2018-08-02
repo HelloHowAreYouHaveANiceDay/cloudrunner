@@ -29,6 +29,9 @@ const mutations = {
     }
     return true;
   },
+  log(state, payload) {
+    state.byId[payload.id].log.push(payload.message);
+  },
   markComplete(state, id) {
     state[id].complete = true;
   },
@@ -43,6 +46,7 @@ const actions = {
       const newJob = {
         id: UUID(),
         complete: false,
+        log: [],
         ...job,
       };
       context.commit('add', newJob);
@@ -57,13 +61,27 @@ const actions = {
         reject(new Error('cannot remove from empty list'));
       }
     }),
+  log: (context, payload) => {
+    context.commit('log', payload);
+  },
   run: (context, id) =>
     new Promise((resolve, reject) => {
       const payload = {
         job: context.state.byId[id],
       };
       ipcRenderer.send('job', payload);
+      const pl = {
+        id,
+      };
 
+      ipcRenderer.on(id, (event, arg) => {
+        if (arg === 'CLOSE') {
+          ipcRenderer.removeAllListeners(id);
+        } else {
+          pl.message = arg;
+          context.dispatch('log', pl);
+        }
+      });
       resolve();
     }),
   loadPresets: context => new Promise((resolve, reject) => {

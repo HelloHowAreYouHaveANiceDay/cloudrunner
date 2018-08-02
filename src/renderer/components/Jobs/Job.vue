@@ -36,13 +36,6 @@ export default {
     run() {
       this.$store.dispatch("Jobs/run", this.jobId);
 
-      ipcRenderer.on(this.jobId, (event, arg) => {
-        if (arg === 'CLOSE') {
-          ipcRenderer.removeAllListeners(this.jobId);
-        } else {
-          console.log(arg);
-        }
-      });
     }
   }
 };
