@@ -33,7 +33,7 @@ const mutations = {
     state.byId[payload.id].log.push(payload.message);
   },
   markComplete(state, id) {
-    state[id].complete = true;
+    state.byId[id].complete = true;
   },
   setPresets(state, presets) {
     state.presets = presets;
@@ -64,6 +64,9 @@ const actions = {
   log: (context, payload) => {
     context.commit('log', payload);
   },
+  complete: (context, id) => {
+    context.commit('markComplete', id);
+  },
   run: (context, id) =>
     new Promise((resolve, reject) => {
       const payload = {
@@ -76,7 +79,9 @@ const actions = {
 
       ipcRenderer.on(id, (event, arg) => {
         if (arg === 'CLOSE') {
+          console.log('task completed');
           ipcRenderer.removeAllListeners(id);
+          context.dispatch('complete', id);
         } else {
           pl.message = arg;
           context.dispatch('log', pl);

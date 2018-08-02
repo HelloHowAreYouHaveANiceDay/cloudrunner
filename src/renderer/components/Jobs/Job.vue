@@ -13,6 +13,12 @@
             </div>
           </div>
         </nav>
+        <div @click="toggle" class="button is-fullwidth">
+          logs ({{job.log.length}})
+        </div>
+        <div v-show="showLog" class="content is-small">
+          <blockquote v-for="(log, index) in job.log" :key="index"> {{log}} </blockquote>
+        </div>
       </div>
     </article>
   </div>
@@ -25,7 +31,9 @@ export default {
   name: "Job",
   props: ["jobId"],
   data() {
-    return {};
+    return {
+      showLog: false,
+    };
   },
   computed: {
     job() {
@@ -36,6 +44,9 @@ export default {
     run() {
       this.$store.dispatch("Jobs/run", this.jobId);
 
+    },
+    toggle(){
+      this.showLog = !this.showLog;
     }
   }
 };
