@@ -1,8 +1,8 @@
 <template>
-  <div id="wrapper" class="section container">
-    <div class="content">
+  <div id="wrapper" class="">
+    <!-- <div class="content">
         <channels></channels>
-    </div>
+    </div> -->
     <div>
         <viewport></viewport>
     </div>
