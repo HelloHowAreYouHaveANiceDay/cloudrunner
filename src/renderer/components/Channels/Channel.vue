@@ -1,66 +1,77 @@
 <template>
-  <div class="channel tile is-vertical is-parent card">
-    <div>
+  <div class="">
+<nav class="panel">
+  <div class="panel-block">
       name: {{channel.name}}
-    </div>
-    
+  </div>
+  <div class="panel-block">
 
     <div class="field has-addons">
-  <div class="control">
-    <div class="select">
-      <select name="" id="" v-model="selectedPreset">
-        <option value="null">select a preset</option>
-        <option v-for="preset in presets" :value="preset" :key="preset.name">{{preset.name}}</option>
-      </select>
-    </div>
-  </div>
-  <div class="control">
-    <div @click='addJob' class="button">
-      add job
-    </div>
-  </div>
-</div>
 
-    <div class="button">
-      channel stuff
+      <div class="control">
+
+        <div class="select">
+          <select name="" id="" v-model="selectedPreset">
+            <option value="null">select a preset</option>
+            <option v-for="preset in presets" :value="preset" :key="preset.name">{{preset.name}}</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="control">
+
+        <div @click='addJob' class="button">
+          add job
+        </div>
+
+      </div>
+
     </div>
-    <div @click="removeChannel" class="button is-danger">
+
+  </div>
+
+  <job v-for="job_id in jobs" :job-id="job_id" :key="job_id"></job>
+
+  <div class="panel-block">
+    <div @click="removeChannel" class="button is-danger is-fullwidth">
       remove channel
     </div>
-    <section>
-      <job v-for="job_id in jobs" :job-id="job_id" :key="job_id"></job>
-    </section>
+  </div>
+</nav>
+
+
   </div>
 </template>
 
 <script>
-import Job from '../Jobs/Job';
+import Job from "../Jobs/Job";
 
 export default {
   name: "Channel",
   props: ["channelId"],
-  data(){
+  data() {
     return {
-      selectedPreset: null,
-    }
+      selectedPreset: null
+    };
   },
   components: {
     Job
   },
   computed: {
-    jobs(){
+    jobs() {
       return this.$store.state.Jobs.allIds;
     },
-    presets(){
+    presets() {
       return this.$store.state.Jobs.presets;
     },
-    channel(){
+    channel() {
       return this.$store.state.Channels.byId[this.channelId];
     }
   },
-  mounted(){
-    if(this.$store.state.Jobs.presets.length === 0){
-      this.$store.dispatch('Jobs/loadPresets');
+  mounted() {
+    if (this.$store.state.Jobs.presets.length === 0) {
+      this.$store.dispatch("Jobs/loadPresets");
     }
   },
   methods: {
@@ -72,11 +83,9 @@ export default {
         });
     },
     addJob() {
-      this.$store
-        .dispatch('Jobs/add', this.selectedPreset)
-        .then(response => {
-          console.log(response);
-        });
+      this.$store.dispatch("Jobs/add", this.selectedPreset).then(response => {
+        console.log(response);
+      });
     }
   }
 };

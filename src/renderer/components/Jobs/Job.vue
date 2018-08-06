@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <article class="media">
+  <div class="panel-block">
+    <!-- <article class="media">
       <div class="media-content">
         <div class="content">
           <p>job name : {{job.name}}</p>
@@ -20,7 +20,12 @@
           <blockquote v-for="(log, index) in job.log" :key="index"> {{log}} </blockquote>
         </div>
       </div>
-    </article>
+    </article> -->
+  <span class="panel-icon">
+    <font-awesome-icon v-show="job.complete" icon="fa-check"/>
+    <font-awesome-icon v-show="!job.complete" icon="money-bill-alt"/>
+    </span>
+    {{job.name}}
   </div>
 </template>
 

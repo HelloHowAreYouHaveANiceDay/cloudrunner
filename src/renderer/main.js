@@ -2,6 +2,7 @@ import Vue from 'vue';
 import axios from 'axios';
 import 'bulma/css/bulma.css';
 import { ipcRenderer } from 'electron';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 import App from './App';
 import router from './router';
@@ -14,6 +15,8 @@ if (!process.env.IS_WEB) {
     console.log(arg);
   });
 }
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.http = Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 

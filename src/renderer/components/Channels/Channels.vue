@@ -10,7 +10,7 @@
     </a>
   </p>
 </div>
-<div class='tile is-ancestor'>
+<div class='tile'>
     <channel v-for='channel in channels' :channel-id='channel' :key='channel.name'></channel>
 </div>
   </div> 

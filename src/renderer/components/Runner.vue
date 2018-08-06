@@ -1,5 +1,5 @@
 <template>
-  <div id="wrapper" class="">
+  <div id="wrapper" class="container">
     <div class="content">
         <channels></channels>
     </div>
@@ -15,7 +15,7 @@ import Channels from './Channels/Channels';
 import Viewport from './Editor/Viewport';
 
 export default {
-  name: 'landing-page',
+  name: 'runner',
   components: {
     Channels,
     Viewport,
