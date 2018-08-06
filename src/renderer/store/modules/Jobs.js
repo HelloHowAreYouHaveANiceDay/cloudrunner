@@ -72,6 +72,7 @@ const actions = {
       const payload = {
         job: context.state.byId[id],
       };
+      // console.log(id);
       ipcRenderer.send('job', payload);
       const pl = {
         id,

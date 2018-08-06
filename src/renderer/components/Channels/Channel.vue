@@ -32,6 +32,11 @@
   </div>
 
   <job v-for="job_id in jobs" :job-id="job_id" :key="job_id"></job>
+  <div class="panel-block">
+    <div @click="runChannel" class="button is-info is-fullwidth">
+      run jobs
+    </div>
+  </div>
 
   <div class="panel-block">
     <div @click="removeChannel" class="button is-danger is-fullwidth">
@@ -86,7 +91,12 @@ export default {
       this.$store.dispatch("Jobs/add", this.selectedPreset).then(response => {
         console.log(response);
       });
-    }
+    },
+    runChannel() {
+      // how to get everything to run in sequence?
+      // const promiseArr = this.jobs.map((job)=>this.$store.dispatch('Jobs/run', job));
+      console.log(promiseArr);
+    },
   }
 };
 </script>

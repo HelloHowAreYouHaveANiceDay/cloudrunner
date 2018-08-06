@@ -22,8 +22,8 @@
       </div>
     </article> -->
   <span class="panel-icon">
-    <font-awesome-icon v-show="job.complete" icon="fa-check"/>
-    <font-awesome-icon v-show="!job.complete" icon="money-bill-alt"/>
+    <font-awesome-icon v-show="job.complete" icon="check"/>
+    <font-awesome-icon v-show="!job.complete" icon="times"/>
     </span>
     {{job.name}}
   </div>
