@@ -1,10 +1,10 @@
 <template>
   <div id="wrapper" class="">
-    <!-- <div class="content">
+    <div class="content">
         <channels></channels>
-    </div> -->
+    </div>
     <div>
-        <viewport></viewport>
+        <!-- <viewport></viewport> -->
     </div>
   </div>
 </template>

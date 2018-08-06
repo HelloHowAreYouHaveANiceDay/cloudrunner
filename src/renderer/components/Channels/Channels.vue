@@ -11,7 +11,7 @@
   </p>
 </div>
 <div class='tile is-ancestor'>
-    <channel v-for='channel in channels' :channel='channel' :key='channel.name'></channel>
+    <channel v-for='channel in channels' :channel-id='channel' :key='channel.name'></channel>
 </div>
   </div> 
 </template>
@@ -31,7 +31,7 @@ export default {
   },
   computed: {
     channels() {
-      return this.$store.state.Channels.channels;
+      return this.$store.state.Channels.allIds;
     },
   },
   methods: {

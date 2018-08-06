@@ -6,19 +6,19 @@
     
 
     <div class="field has-addons">
-  <p class="control">
+  <div class="control">
     <div class="select">
       <select name="" id="" v-model="selectedPreset">
         <option value="null">select a preset</option>
         <option v-for="preset in presets" :value="preset" :key="preset.name">{{preset.name}}</option>
       </select>
     </div>
-  </p>
-  <p class="control">
+  </div>
+  <div class="control">
     <div @click='addJob' class="button">
       add job
     </div>
-  </p>
+  </div>
 </div>
 
     <div class="button">
@@ -38,7 +38,7 @@ import Job from '../Jobs/Job';
 
 export default {
   name: "Channel",
-  props: ["channel"],
+  props: ["channelId"],
   data(){
     return {
       selectedPreset: null,
@@ -53,6 +53,9 @@ export default {
     },
     presets(){
       return this.$store.state.Jobs.presets;
+    },
+    channel(){
+      return this.$store.state.Channels.byId[this.channelId];
     }
   },
   mounted(){
